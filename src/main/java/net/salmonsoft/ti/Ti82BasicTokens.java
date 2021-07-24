@@ -175,7 +175,6 @@ public class Ti82BasicTokens {
 	Histogram                      [252]               FC
 	xyLine                         [253]               FD
 	LinReg(ax+b)                   [255]               FF
-	#endif
 */
 	
 	private static final Ti82BasicTokenMap tm = new Ti82BasicTokenMap();
@@ -183,6 +182,7 @@ public class Ti82BasicTokens {
 		tm.add(">DMS", 0x01);
 		tm.add(">Dec", 0x02);
 		tm.add(">Frac", 0x03);
+		tm.add("\\->\\", 0x04);
 		tm.add("Boxplot", 0x05);
 		tm.add("[", 0x06);
 		tm.add("]", 0x07);
@@ -219,6 +219,7 @@ public class Ti82BasicTokens {
 		tm.add("8", 0x38);
 		tm.add("9", 0x39);
 		tm.add(".", 0x3A);
+		tm.add("\\E\\", 0x3B);
 		tm.add(" or ", 0x3C);
 		tm.add(":", 0x3E);
 		tm.add(" and ", 0x40);
@@ -239,10 +240,15 @@ public class Ti82BasicTokens {
 		tm.add("O", 0x4F);
 		tm.add("P",  0x50);
 		tm.add("Q", 0x51);
+		tm.add("R", 0x52);
 		tm.add("S", 0x53);
+		tm.add("T", 0x54);
 		tm.add("U", 0x55);
+		tm.add("V", 0x56);
 		tm.add("W", 0x57);
 		tm.add("X", 0x58);
+		tm.add("Y", 0x59);
+		tm.add("Z", 0x60);
 		tm.add("Degree", 0x65);
 		tm.add("Normal", 0x66);
 		tm.add("Float", 0x69);
@@ -271,6 +277,7 @@ public class Ti82BasicTokens {
 		tm.add("Pt-Change(", 0xA0);
 		tm.add("Horizontal ", 0xA6);
 		tm.add("?", 0xAF);
+		tm.add("sin ", 0xC2);
 		tm.add("If ", 0xCE);
 		tm.add("For(", 0xD3);
 		tm.add("End", 0xD4);
@@ -278,7 +285,7 @@ public class Ti82BasicTokens {
 		tm.add("Goto ", 0xD7);
 		tm.add("Pause ", 0xD8);
 		tm.add("IS>(", 0xDA);
-		tm.add("Input", 0xDC);
+		tm.add("Input ", 0xDC);
 		tm.add("Disp ", 0xDE);
 		tm.add("DispGraph", 0xDF);
 		tm.add("Output(", 0xE0);
@@ -290,7 +297,6 @@ public class Ti82BasicTokens {
 		tm.add("Plot3(", 0xEE);
 		tm.add("ClrList ", 0xFA);
 	}
-	
 
 	private Ti82BasicProgram theProg;
 
@@ -2154,20 +2160,6 @@ void parser_parse_backslash_D_e_l_t_a_dash_y()
    }
 }
 
-void parser_parse_backslash_E()
-{
-   int c = input_get_char();
-
-   if (c == '\\')
-   {
-      program_add_data_1(0x3b);
-   }
-   else
-   {
-      input_die_syntax();
-   }
-}
-
 void parser_parse_backslash_L()
 {
    int c = input_get_char();
@@ -3308,34 +3300,6 @@ void parser_parse_backslash_d_o_t_space_i_c_o_n()
    }
 }
 
-void parser_parse_backslash_dash()
-{
-   int c = input_get_char();
-
-   if (c == '>')
-   {
-      parser_parse_backslash_dash_greaterthan();
-   }
-   else
-   {
-      input_die_syntax();
-   }
-}
-
-void parser_parse_backslash_dash_greaterthan()
-{
-   int c = input_get_char();
-
-   if (c == '\\')
-   {
-      program_add_data_1(0x04);
-   }
-   else
-   {
-      input_die_syntax();
-   }
-}
-
 void parser_parse_backslash_greaterthan()
 {
    int c = input_get_char();
@@ -4328,51 +4292,5 @@ void parser_parse_r_a_n()
    }
 }
 
-void parser_parse_s()
-{
-   int c = input_get_char();
-
-   if (c == 'i')
-   {
-      parser_parse_s_i();
-   }
-   else
-   {
-      input_die_syntax();
-   }
-}
-
-void parser_parse_s_i()
-{
-   int c = input_get_char();
-
-   if (c == 'n')
-   {
-      parser_parse_s_i_n();
-   }
-   else
-   {
-      input_die_syntax();
-   }
-}
-
-void parser_parse_s_i_n()
-{
-   int c = input_get_char();
-
-   if (c == ' ')
-   {
-      program_add_data_1(0xc2);
-   }
-   else
-   {
-      input_die_syntax();
-   }
-}
-
-
-
-	 * 
-	 * 
 	 */
 }
